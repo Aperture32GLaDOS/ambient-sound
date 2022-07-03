@@ -13,7 +13,7 @@ fn display_noise_options(noises: &Vec<&str>)
         output = output + &format!(", {}: {}", counter, noise);
         counter += 1;
     }
-    output = output.split_at(1).1.to_string();
+    output = output.split_at(2).1.to_string();
     println!("{}", output);
 }
 
