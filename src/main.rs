@@ -1,4 +1,5 @@
 use soloud::*;
+use std::env;
 use std::path;
 use std::collections::HashMap;
 use std::io;
@@ -20,20 +21,21 @@ fn load_noise(index: usize, waveforms:  &mut Vec<Wav>, sounds: &mut Vec<Handle>,
 {
     let mut asset: String = String::new();
     match index {
-        0 => asset = "./assets/main-birds.mp3".to_string(),
-        1 => asset = "./assets/main-crickets.mp3".to_string(),
-        2 => asset = "./assets/main-fire.mp3".to_string(),
-        3 => asset = "./assets/main-people.mp3".to_string(),
-        4 => asset = "./assets/main-rain.mp3".to_string(),
-        5 => asset = "./assets/main-sbowl.mp3".to_string(),
-        6 => asset = "./assets/main-thunder.mp3".to_string(),
-        7 => asset = "./assets/main-waves.mp3".to_string(),
-        8 => asset = "./assets/main-whitenoise.mp3".to_string(),
+        0 => asset = "assets/main-birds.mp3".to_string(),
+        1 => asset = "assets/main-crickets.mp3".to_string(),
+        2 => asset = "assets/main-fire.mp3".to_string(),
+        3 => asset = "assets/main-people.mp3".to_string(),
+        4 => asset = "assets/main-rain.mp3".to_string(),
+        5 => asset = "assets/main-sbowl.mp3".to_string(),
+        6 => asset = "assets/main-thunder.mp3".to_string(),
+        7 => asset = "assets/main-waves.mp3".to_string(),
+        8 => asset = "assets/main-whitenoise.mp3".to_string(),
         9 => asset = "./assets/main-wind.mp3".to_string(),
         _ => {}
     }
-    println!("{}", asset);
-    let path: &path::Path = path::Path::new(&asset);
+    let mut path: path::PathBuf = env::current_exe().unwrap();
+    path.pop();
+    path.push(path::Path::new(&asset));
     let new_index: usize = waveforms.len();
     let mut waveform: Wav = Wav::default();
     waveform.load(path).unwrap();
